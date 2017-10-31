@@ -1,2 +1,5 @@
 int x;
+struct aStruct{ };
+void vo;
+bool yo;
 int y;
