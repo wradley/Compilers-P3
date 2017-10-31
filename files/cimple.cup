@@ -151,8 +151,8 @@ type            ::= INT
                 ;
 
 loc		::= id:i
-		{:
-		:} RESULT = i;
+		{: RESULT = i;
+		:} 
 		| loc:l DOT id:i
 		{: RESULT = new DotAccessExpNode(l, i);
 		:} 
