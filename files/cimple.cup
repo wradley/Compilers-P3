@@ -79,6 +79,8 @@ non terminal ProgramNode      program;
 non terminal LinkedList       declList;
 non terminal DeclNode         decl;
 non terminal VarDeclNode      varDecl;
+non terminal StructDeclNode   structDecl;
+non terminal LinkedList       structBody;
 non terminal TypeNode         type;
 non terminal IdNode           id;
  
@@ -115,11 +117,35 @@ decl            ::= varDecl:v
 varDecl         ::= type:t id:i SEMICOLON
                 {: RESULT = new VarDeclNode(t, i, VarDeclNode.NOT_STRUCT);
                 :}
+		| STRUCT id:structId id:varId SEMICOLON
+		{: RESULT = new VarDeclNode(new StructNode(structId), varId, 0);
+		:}
                 ;
+
+structDecl	::= STRUCT id:i LCURLY structBody:body RCURLY SEMICOLON
+		{: RESULT = StructDeclNode(i, body);
+		:}
+		;
+
+structBody	::= structBody:sBody varDecl:v
+		{: sBody.addLast(v);
+		   RESULT = sBody;
+		:}
+		| varDecl:v
+		{: sBody = new LinkedList<DeclNode>();
+		   sBody.add(v);
+		   RESULT = sBody;
+		:} 
+		;
 
 type            ::= INT
                 {: RESULT = new IntNode();
                 :}
+		| BOOL
+		{: RESULT = new BoolNode();
+		:}
+		| VOID
+		{: RESULT = new VoidNode();
                 ;
 
 id              ::= ID:i
