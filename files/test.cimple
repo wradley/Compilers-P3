@@ -1,5 +1,14 @@
 int x;
-hi.dude;
-void vo;
-bool yo;
-int y;
+int func(int i)
+{
+    int a;
+    return 4;
+}
+
+struct kylesStruct
+{
+    int a;
+    bool b;
+    void c;
+    struct kylesStruct ks;
+};
