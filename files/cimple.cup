@@ -395,7 +395,7 @@ type            ::= INT
                 :}
                 | BOOL
                 {: RESULT = new BoolNode();
-                }
+                :}
                 | VOID
 		            {: RESULT = new VoidNode();
 		            :}
