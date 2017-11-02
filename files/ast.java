@@ -427,7 +427,10 @@ class ReadStmtNode extends StmtNode {
     }
 
     public void unparse(PrintWriter p, int indent) {
-        myExp.unparse(p, indent);
+	doIndent(p, indent);
+	p.print("cin >> ");
+        myExp.unparse(p, 0);
+	p.print(";");
     }
 
     // 1 kid (actually can only be an IdNode or an ArrayExpNode)
@@ -440,7 +443,10 @@ class WriteStmtNode extends StmtNode {
     }
 
     public void unparse(PrintWriter p, int indent) {
-        myExp.unparse(p, indent);
+	doIndent(p, indent);
+	p.print("cout << ");
+        myExp.unparse(p, 0);
+	p.print(";");
     }
 
     // 1 kid
@@ -539,6 +545,7 @@ class CallStmtNode extends StmtNode {
 
     public void unparse(PrintWriter p, int indent) {
         myCall.unparse(p, indent);
+	p.print(";");
     }
 
     // 1 kid
@@ -552,9 +559,9 @@ class ReturnStmtNode extends StmtNode {
 
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
-        p.print("return ");
+        p.print("return");
         if (myExp != null)
-            myExp.unparse(p, 0);
+            myExp.unparse(p, 1);
         p.print(";");
     }
 
@@ -703,7 +710,7 @@ class CallExpNode extends ExpNode {
         p.print("(");
         if (myExpList != null)
             myExpList.unparse(p, 0);
-        p.print(");");
+        p.print(")");
     }
 
     // 2 kids

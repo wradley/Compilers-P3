@@ -13,6 +13,7 @@ void noFormals () {
 void decFunc () {
     int y;
     int z;
+    return;
 }
 void stmtFunc () {
     y++;
@@ -27,12 +28,75 @@ bool simpleFunc (bool h, int g) {
     argFunc(a, b);
     return h;
 }
-void test () {
+void testAssignExp () {
     assignInt = 7;
     assignInt = (7 / 7);
     assignInt = myStruct.a;
 }
-void test () {
+void testOtherStmts () {
+    myStruct.a++;
+    myStruct.b--;
+    cin >> aVariable;
+    cout << aVariable;
+    if ((!false)) {
+        int a;
+        bool b;
+        c = (a + b);
+    }
+    if ((a > b)) {
+    }
+    if ((!false)) {
+        int a;
+        bool b;
+    }
+    if (true) {
+        a++;
+        aStruct.b = c;
+    }
+    if (aBool) {
+        woooooo = (doThis - doThat);
+    }
+    else {
+        urgsdfgs = (doThat + doThis);
+    }
+    while (compilerIsHard) {
+        int whelan;
+        int cantDrinkKoolaid;
+        whelan = cantDrinkKoolaid;
+    }
+}
+void testExp () {
+    k = (a + a);
+    k = (a - a);
+    k = (a * a);
+    k = (a / a);
+    k = (!b);
+    k = (b && b);
+    k = (b || b);
+    k = (b == b);
+    k = (b != b);
+    k = (b < b);
+    k = (b > b);
+    k = (b <= b);
+    k = (b >= b);
+    k = (-b);
+    a = (funRets1() + funRets2());
+}
+void testPrecedence () {
     b = ((((!a) + ((-7) / 69)) && TRUE) || (FALSE == ("aString" * anID)));
+    b = ((((a + b) - ((c * d) / e)) && z) || (x == f));
     dood = ((b - z) >= (b + z));
+    while (true) {
+        if (f) {
+        }
+        else {
+            if (true) {
+            }
+            else {
+            }
+            while (then) {
+                z = doThisFunc(BIG_Z);
+            }
+        }
+    }
 }

@@ -22,7 +22,7 @@ void noFormals() {}
 
 // Function declaration with declarations but no statements
 
-void decFunc() { int y; int z; }
+void decFunc() { int y; int z; return;} // also checks that the exp following return can be null
 
 // Function declaration with no declarations but with statements
 
@@ -35,41 +35,94 @@ bool simpleFunc(int g, bool h) {
     struct myStruct s;
     a = g;
     g++;
-    noArgFunc();
+    noArgFunc(); // This also tests that an exp list can be null
     argFunc(a, b);
     return h;
 }
 
-// All of the statements in cimple
+// All of the statements in cimple, return rules and fncalls have already been tested
 
 // Assign Exp
 
-void test() {
+void testAssignExp() {
     assignInt = 7;
     assignInt = 7/7;
     assignInt = myStruct.a;
 }
 
-// Exp Rules (should be parenthezised to reflect precedence)
+// Stmt Rules (should be parenthezised to reflect precedence)
 
-// ... easy
+void testOtherStmts() {
+	myStruct.a++;
+	myStruct.b--;
+	cin >> aVariable;
+	cout << aVariable;
+	// if statement with var decl and stmts
+	if(!false) { int a; bool b; c = a + b; }
+	// Empty if statement
+	if(a > b) {}
+	// if statement with decl but no stmts
+	if(!false) { int a; bool b; }
+	// if statement with no decl but has stmts
+	if(true) {a++; aStruct.b = c;}
+
+	// empty var lists and stmt lists will not be tested for if/else and while because they have already been tested for if stmts
+	if(aBool) { woooooo = doThis - doThat; }
+	else { urgsdfgs = doThat + doThis;}
+
+	while(compilerIsHard) {
+		int whelan;
+		int cantDrinkKoolaid;
+		whelan = cantDrinkKoolaid;
+	}
+}
+
+// Exp Rules, assign exp has already been tested
+
+void testExp() {
+	k = a + a;
+	k = a - a;
+k = 	a * a;
+k = 	a / a;
+k = 	!b;
+k = 	b && b;
+k = 	b || b;
+k = 	b == b;
+k = 	b != b;
+k = 	b < b;
+k = 	b > b;
+k = 	b <= b;
+k = 	b >= b;
+k = 	-b;
+	a = funRets1() + funRets2();
+}
 
 // ****************************************************************
 // At this point the parser has been fully tested, now we will test
-// the unparsing
+// the unparsing aspects (indentation and precedence)
 // ****************************************************************
 
-void test() {
-    // NOTE: All term rules are also tested in this section
-    // NOTE: fncall and actualList rules are tested with randomFunc()
+void testPrecedence() {
 
     b = !a + -7 / 69 && TRUE || FALSE == "aString" * anID;
+    b = a + b - c * d / e && z || x == f;
 
     // Remaining exp grammar rules (term in parens should have highest precedence)
 
-    dood = b - z >= b + z;    
+    dood = b - z >= b + z;   
 
     // Test indenting works correctly, and also that brackets are correct.
+	// A lot of nesting to make sure indenting works
 
-    // Test bad cases in another input file
+	while (true) {
+if (f) {
 }
+else { 
+if(true)       {}           else{
+}while(then) {
+z = doThisFunc(BIG_Z);
+}
+}}
+}
+
+
