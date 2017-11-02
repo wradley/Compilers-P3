@@ -1,34 +1,38 @@
-int x;
-int func (int i) {
-    int a;
-    a = (3 + (3 - (7 / 1)));
-    a++;
-    b--;
-    if ((a == 12)) {
-        return 1;
-    }
-    if (true) {
-        return 1;
-    }
-    else {
-        return 100;
-    }
-    return 4;
-}
-struct kylesStruct {
-    int a;
-    bool b;
-    void c;
-    struct kylesStruct ks;
+int a;
+int myInt;
+struct myStruct {
+    int sInt;
+    void v;
+    bool isTrue;
 };
-void aFunc () {
-    if ((b == (-1))) {
-        x = ((4 + (3 * 5)) - y);
-        while (c) {
-            y = ((y * 2) + x);
-        }
-    }
-    else {
-        x = 0;
-    }
+bool isFalse;
+void emptyFunc (bool c, int b, int a) {
+}
+void noFormals () {
+}
+void decFunc () {
+    int y;
+    int z;
+}
+void stmtFunc () {
+    y++;
+    z++;
+}
+bool simpleFunc (bool h, int g) {
+    int a;
+    struct myStruct s;
+    a = g;
+    g++;
+    noArgFunc();
+    argFunc(a, b);
+    return h;
+}
+void test () {
+    assignInt = 7;
+    assignInt = (7 / 7);
+    assignInt = myStruct.a;
+}
+void test () {
+    b = ((((!a) + ((-7) / 69)) && TRUE) || (FALSE == ("aString" * anID)));
+    dood = ((b - z) >= (b + z));
 }

@@ -1,0 +1,36 @@
+int x;
+int func(int i)
+{
+    int a;
+    a = (3 + (3 - (7 / 1)));
+    a++;
+    b--;
+    if (a == 12)
+    {
+        return 1;
+    }
+
+    if (true)
+    {
+        return 1;
+    }
+
+    else 
+    {
+        return 100;
+    }
+
+    return 4;
+}
+
+struct kylesStruct
+{
+    int a;
+    bool b;
+    void c;
+    struct kylesStruct ks;
+};
+
+void aFunc() {
+if (b == -1) { x = 4+3*5-y; while (c) { y = y*2+x; } } else { x = 0; }
+}

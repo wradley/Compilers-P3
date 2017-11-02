@@ -1,36 +1,75 @@
-int x;
-int func(int i)
-{
-    int a;
-    a = (3 + (3 - (7 / 1)));
-    a++;
-    b--;
-    if (a == 12)
-    {
-        return 1;
-    }
+// Contains tests for all of the production rules in cimple
 
-    if (true)
-    {
-        return 1;
-    }
+// Declare some variables(int, void, bool), structs, and functions
 
-    else 
-    {
-        return 100;
-    }
+int a; int myInt;
 
-    return 4;
-}
-
-struct kylesStruct
-{
-    int a;
-    bool b;
-    void c;
-    struct kylesStruct ks;
+struct myStruct {
+    int sInt;
+    void v;
+    bool isTrue;
 };
 
-void aFunc() {
-if (b == -1) { x = 4+3*5-y; while (c) { y = y*2+x; } } else { x = 0; }
+bool isFalse;
+
+// Empty body function declaration with formals
+
+void emptyFunc(int a, int b, bool c) {}
+
+// Function declaration with no formals or body
+
+void noFormals() {}
+
+// Function declaration with declarations but no statements
+
+void decFunc() { int y; int z; }
+
+// Function declaration with no declarations but with statements
+
+void stmtFunc() { y++; z++; }
+
+// Simple Function declaration with declarations and statements
+
+bool simpleFunc(int g, bool h) {
+    int a;
+    struct myStruct s;
+    a = g;
+    g++;
+    noArgFunc();
+    argFunc(a, b);
+    return h;
+}
+
+// All of the statements in cimple
+
+// Assign Exp
+
+void test() {
+    assignInt = 7;
+    assignInt = 7/7;
+    assignInt = myStruct.a;
+}
+
+// Exp Rules (should be parenthezised to reflect precedence)
+
+// ... easy
+
+// ****************************************************************
+// At this point the parser has been fully tested, now we will test
+// the unparsing
+// ****************************************************************
+
+void test() {
+    // NOTE: All term rules are also tested in this section
+    // NOTE: fncall and actualList rules are tested with randomFunc()
+
+    b = !a + -7 / 69 && TRUE || FALSE == "aString" * anID;
+
+    // Remaining exp grammar rules (term in parens should have highest precedence)
+
+    dood = b - z >= b + z;    
+
+    // Test indenting works correctly, and also that brackets are correct.
+
+    // Test bad cases in another input file
 }

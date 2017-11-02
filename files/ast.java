@@ -163,6 +163,8 @@ class FormalsListNode extends ASTnode {
         for (int i = 0; i < myFormals.size(); ++i)
         {
             myFormals.get(i).unparse(p, indent);
+            if (i + 1 < myFormals.size())
+                p.print(", ");
         }
     }
 
@@ -212,6 +214,8 @@ class ExpListNode extends ASTnode {
         for (int i = 0; i < myExps.size(); ++i)
         {
             myExps.get(i).unparse(p, indent);
+            if (i + 1 < myExps.size())
+                p.print(", ");
         }
     }
 
@@ -549,7 +553,8 @@ class ReturnStmtNode extends StmtNode {
     public void unparse(PrintWriter p, int indent) {
         doIndent(p, indent);
         p.print("return ");
-        myExp.unparse(p, 0);
+        if (myExp != null)
+            myExp.unparse(p, 0);
         p.print(";");
     }
 
@@ -693,8 +698,12 @@ class CallExpNode extends ExpNode {
 
     // ** unparse **
     public void unparse(PrintWriter p, int indent) {
-        myId.unparse(p, indent);
-        myExpList.unparse(p, indent);
+        doIndent(p, indent);
+        myId.unparse(p, 0);
+        p.print("(");
+        if (myExpList != null)
+            myExpList.unparse(p, 0);
+        p.print(");");
     }
 
     // 2 kids
