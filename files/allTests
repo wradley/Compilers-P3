@@ -1,0 +1,72 @@
+// Contains tests for all of the production rules in cimple
+
+// Declare some variables(int, void, bool), structs, and functions
+
+int a; int myInt;
+
+struct myStruct {
+    int sInt;
+    void v;
+    bool isTrue;
+};
+
+bool isFalse;
+
+// Empty body function declaration with formals
+
+void emptyFunc(int a, int b, bool c) {}
+
+// Function declaration with no formals or body
+
+void noFormals() {}
+
+// Function declaration with declarations but no statements
+
+void decFunc() { int y; int z; }
+
+// Function declaration with no declarations but with statements
+
+void stmtFunc() { y++; z++; }
+
+// Simple Function declaration with declarations and statements
+
+bool simpleFunc(int g, bool h) {
+    int a;
+    struct myStruct s;
+    a = g;
+    g++;
+    noArgFunc();
+    argFunc(int a, bool b);
+    return h;
+}
+
+// All of the statements in cimple
+
+// Assign Exp
+
+assignInt = 7;
+assignInt = 7/7;
+assignInt = myStruct.a;
+
+// Exp Rules (should be parenthezised to reflect precedence)
+
+// ... easy
+
+// ****************************************************************
+// At this point the parser has been fully tested, now we will test
+// the unparsing
+// ****************************************************************
+
+
+// NOTE: All term rules are also tested in this section
+// NOTE: fncall and actualList rules are tested with randomFunc()
+
+!a + -7 / 69 && TRUE || FALSE == "aString" * anID > randomFunc(int a, bool b, void v);
+
+// Remaining exp grammar rules (term in parens should have highest precedence)
+
+b - z >= b + z < (b - z) <= b + zFunc();
+
+// Test indenting works correctly, and also that brackets are correct.
+
+// Test bad cases in another input file
