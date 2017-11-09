@@ -133,70 +133,70 @@ declList        ::= declList:dl decl:d
 decl            ::= varDecl:v
                 {: RESULT = v;
                 :}
-		            | fnDecl:f
-		            {: RESULT = f;
-		            :}
-		            | structDecl:s
-		            {: RESULT = s;
-		            :}
+		| fnDecl:f
+		{: RESULT = f;
+		:}
+		| structDecl:s
+		{: RESULT = s;
+		:}
                 ;
 
 varDeclList     ::= varDeclList:vl varDecl:v
-		            {: vl.addLast(v);
-		              RESULT = vl;
-		            :}
+		{: vl.addLast(v);
+		   RESULT = vl;
+		:}
                 | /* epsilon */
-		            {: LinkedList<VarDeclNode> varList = new LinkedList<VarDeclNode>();
-		              RESULT = varList;
-		            :}
+		{: LinkedList<VarDeclNode> varList = new LinkedList<VarDeclNode>();
+		   RESULT = varList;
+		:}
                 ;
 
 varDecl         ::= type:t id:i SEMICOLON
-                {: RESULT = new VarDeclNode(t, i, VarDeclNode.NOT_STRUCT);
+                {:  RESULT = new VarDeclNode(t, i, VarDeclNode.NOT_STRUCT);
                 :}
-		            | STRUCT id:structId id:varId SEMICOLON
-		            {: RESULT = new VarDeclNode(new StructNode(structId), varId, 0);
-		            :}
+		| STRUCT id:structId id:varId SEMICOLON
+		{:  RESULT = new VarDeclNode(new StructNode(structId), varId, 0);
+		:}
                 ;
 
 fnDecl          ::= type:t id:i formals:f fnBody:fb
-		            {: RESULT = new FnDeclNode(t, i, f, fb);
-		            :}
+		{: RESULT = new FnDeclNode(t, i, f, fb);
+		:}
                 ;
 
 structDecl	::= STRUCT id:i LCURLY structBody:sb RCURLY SEMICOLON
-		            {: RESULT = new StructDeclNode(i, new DeclListNode(sb));
-		            :}
-		            ;
+		{: RESULT = new StructDeclNode(i, new DeclListNode(sb));
+		:}
+		;
 
 structBody	::= structBody:sBody varDecl:v
-		            {: sBody.addLast(v);
-		              RESULT = sBody;
-		            :}
-		            | varDecl:v
-		            {: LinkedList<DeclNode> sBody = new LinkedList<DeclNode>();
-		               sBody.add(v);
-		               RESULT = sBody;
-		            :} 
-		            ;
+		{: sBody.addLast(v);
+		   RESULT = sBody;
+		:}
+		| varDecl:v
+		{: LinkedList<DeclNode> sBody = new LinkedList<DeclNode>();
+		   sBody.add(v);
+		   RESULT = sBody;
+		:} 
+		;
 
 formals         ::= LPAREN RPAREN
-		            {: RESULT = new FormalsListNode(new LinkedList<FormalDeclNode>());
-		            :}
-                  | LPAREN formalsList:fl RPAREN
-		            {: RESULT = new FormalsListNode(fl);
-		            :}
+		{: RESULT = new FormalsListNode(new LinkedList<FormalDeclNode>());
+		:}
+                | LPAREN formalsList:fl RPAREN
+		{: RESULT = new FormalsListNode(fl);
+		:}
                 ;
 
 formalsList     ::= formalDecl:fd
-		            {: LinkedList<FormalDeclNode> dList = new LinkedList<FormalDeclNode>();
-		              dList.add(fd);
-		              RESULT = dList;
-		            :} 
+		{: LinkedList<FormalDeclNode> dList = new LinkedList<FormalDeclNode>();
+		   dList.add(fd);
+		   RESULT = dList;
+		:} 
                 | formalDecl:fd COMMA formalsList:dList
-		            {: dList.addLast(fd);
-		              RESULT = dList;
-		            :}
+		{: dList.addLast(fd);
+		   RESULT = dList;
+		:}
                 ;
 
 formalDecl      ::= type:t id:i        // note: no struct parameters
@@ -377,15 +377,13 @@ fncall          ::=  id:i LPAREN RPAREN   // fn call with no args
                 ;
 
 actualList      ::= exp:e
-                {:
-                  LinkedList<ExpNode> expList = new LinkedList<ExpNode>();
-                  expList.add(e);
-                  RESULT = expList;
+                {: LinkedList<ExpNode> expList = new LinkedList<ExpNode>();
+                   expList.add(e);
+                   RESULT = expList;
                 :}
                 | actualList:aList COMMA exp:e
-                {:
-                  aList.addLast(e);
-                  RESULT = aList;
+                {: aList.addLast(e);
+                   RESULT = aList;
                 :}
                 ;
 
@@ -397,17 +395,17 @@ type            ::= INT
                 {: RESULT = new BoolNode();
                 :}
                 | VOID
-		            {: RESULT = new VoidNode();
-		            :}
+		{: RESULT = new VoidNode();
+		:}
                 ;
 
-loc		          ::= id:i
-		            {: RESULT = i;
-		            :} 
-		            | loc:l DOT id:i
-		            {: RESULT = new DotAccessExpNode(l, i);
-		            :}
-		            ;
+loc		::= id:i
+		{: RESULT = i;
+		:} 
+		| loc:l DOT id:i
+		{: RESULT = new DotAccessExpNode(l, i);
+		:}
+		;
 
 id              ::= ID:i
                 {: RESULT = new IdNode(i.linenum, i.charnum, i.idVal);
